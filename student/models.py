@@ -1,7 +1,8 @@
 from django.db import models
 from user_models.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # Create your models here.
 
 class StudentManager(models.Manager):
@@ -32,3 +33,10 @@ class Student(User):
         
         return super().save(*args, **kwargs)
 
+
+@receiver(post_save, sender=User)
+def create_student_profile(sender, instance, created, **kwargs):
+    if created and instance.designation == User.Designations.STUDENT:
+        StudentProfile.objects.create(
+            user = instance,
+        )

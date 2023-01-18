@@ -38,11 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
+    #Utility Apps
+    'widget_tweaks',
+    'crispy_forms',
+
+    #User Apps
     'user_models',
     'faculty',
     'student',
     'news',
+    'loginregister',
+
 ]
 
 MIDDLEWARE = [

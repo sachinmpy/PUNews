@@ -1,5 +1,7 @@
 from django.db import models
 from user_models.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # Create your models here.
 
 class FacultyManager(models.Manager):
@@ -27,3 +29,11 @@ class Faculty(User):
         
         return super().save(*args, **kwargs)
     
+
+@receiver(signal=post_save, sender=User)
+def create_faculty_profile(sender, instance, created, **kwargs):
+    if created and instance.designation == User.Designations.FACULTY:
+        FacultyProfile.objects.create(
+            user = instance,
+        )
+        

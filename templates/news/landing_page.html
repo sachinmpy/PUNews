@@ -1,5 +1,11 @@
 
 <ul>
-    <li><a href="#">Login</a></li>
-    <li><a href="#">Register</a></li>
+    <li><a href="{% url 'login_page' %}">Login</a></li>
+    <li><a href="{% url 'register_page' %}">Register</a></li>
 </ul>
+
+
+
+{% for message in messages %}
+    {{message}}
+{% endfor %}

@@ -10,7 +10,7 @@ class News(models.Model):
     content = models.TextField()
     posted_date = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=False)
-    approved_by = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, default=None, related_name='approved_by_name')
+    approved_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, default=None, related_name='approved_by_name')
     department = models.CharField(max_length=30, choices=User.Departments.choices, default=User.Departments.NO_DEPARTMENT)
 
     def __str__(self):

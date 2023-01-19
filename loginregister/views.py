@@ -2,8 +2,9 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegisterForm, UserLoginForm
+from .decorators import authenticated_not_allowed
 
-
+@authenticated_not_allowed
 def login_page(request):
     form = UserLoginForm()
 
@@ -12,6 +13,7 @@ def login_page(request):
         # email = request.POST['email']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+        
         if user is not None:
             login(request, user)
             messages.success(request, 'WELCOME!!')
@@ -20,9 +22,8 @@ def login_page(request):
     context = {'form': form}
     return render(request, 'loginregister/login_page.html', context)
 
-
+@authenticated_not_allowed
 def register_page(request):
-
     form = UserRegisterForm()
 
     if request.method == 'POST':
@@ -36,7 +37,7 @@ def register_page(request):
             )
             user.save() 
             messages.success(request,  f'{username} ACCOUNT HAS BEEN CREATED')
-            return redirect('/login/')
+            return redirect('login_page')
         else:
             pass #HANDLE THIS FOR FUCK SAKE
 

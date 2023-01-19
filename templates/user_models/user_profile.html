@@ -1,0 +1,10 @@
+{% extends 'base_templates/base.html' %}
+
+{% block title %} {{username}} {% endblock %}
+
+
+{% block body %}
+    Username: {{details.username}}
+    Department: {{details.department}}
+    Designations: {{details.designation}}
+{% endblock %}

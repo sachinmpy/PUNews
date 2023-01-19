@@ -5,7 +5,7 @@ from .forms import UserRegisterForm, UserLoginForm
 from .decorators import authenticated_not_allowed
 
 @authenticated_not_allowed
-def login_page(request):
+def login_page(request): # (?)IMPLEMENT LOGIN VIA EMAIL 
     form = UserLoginForm()
 
     if request.method == 'POST':

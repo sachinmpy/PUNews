@@ -1,0 +1,37 @@
+{% extends 'base_templates/base.html' %}
+{% block title %} News {% endblock %}
+
+
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        {% include 'base_templates/navbar_loggedin.html' %}
+    {% else %}    
+        {% include 'base_templates/navbar_notloggedin.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    
+    {% if news.link_to_banner is not None %}
+        <div class="banner bg-image d-flex justify-content-center align-items-center" style="height: 330px; background-image: url({{news.link_to_banner}});" >
+        </div>
+    {% endif %}
+    <div style="background-color: white;">
+
+        <div class="headline px-5 pt-5 mt-3 " style="background-color: white;">
+            
+            <span class="display-5 fw-bold" style="max-width: 50rem;"> {{news.headline}} </span> <br>
+            <span>
+                <a href="{% url 'user_profile' news.posted_by %}" class="badge badge-primary fs-6">{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
+            </span>
+            <span class="lead fs-6">{{news.posted_date | date:"D d M Y"}}  </span>
+    
+    
+            
+        </div>
+        <div class="p-5"  style="background-color: white; width: 50rem;">
+            {{news.content}}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base_templates/base.html' %}
+{% block title %} News {% endblock %}
+
+
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        {% include 'base_templates/navbar_loggedin.html' %}
+    {% else %}    
+        {% include 'base_templates/navbar_notloggedin.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="display-4">
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+{% for news in all_news %}
+    <div class="col">
+        <div class="card mt-3 border border-primary shadow-0">
+            <h6 class="card-header ">
+                {{news.posted_by | capfirst}}
+                <div class="text-muted fs-6">   {{news.posted_date | date:"D d M Y"}}  </div>
+            </h6>
+            <div class="card-body">
+            <h5 class="card-title">{{news.headline | truncatechars:64}}</h5>
+            <p class="card-text">{{news.content|truncatechars:128}}</p>
+            <a href="{% url 'view_news' news.news_id %}" class="btn btn-primary">View Story</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

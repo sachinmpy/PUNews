@@ -12,6 +12,8 @@ class News(models.Model):
     is_approved = models.BooleanField(default=False)
     approved_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, default=None, related_name='approved_by_name')
     department = models.CharField(max_length=30, choices=User.Departments.choices, default=User.Departments.NO_DEPARTMENT)
+    
+    link_to_banner = models.URLField(max_length=255, null=True, blank=True, default=None)
 
     def __str__(self):
         return self.headline

@@ -1,0 +1,72 @@
+
+{% block navbar %} 
+<header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+          <a
+          href="{% url 'indexpage' %}"
+          class="list-group-item list-group-item-action py-2 "
+          aria-current="true"
+          >
+          <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Home</span>
+          </a>
+          
+          <a 
+          href="{% url 'news' %}" 
+          class="list-group-item list-group-item-action py-2 "
+          >
+          <i class="fas fa-chart-area fa-fw me-3"></i><span>News</span>
+          </a>
+          
+          <a 
+          href="#" 
+          class="list-group-item list-group-item-action py-2 "
+          >
+          <i class="fas fa-heart fa-solid me-3"></i><span>Global Feed</span>
+          </a>
+
+          <a 
+          href="{% url 'archives' %}" 
+          class="list-group-item list-group-item-action py-2 "
+          >
+          <i class="fas fa-chart-area fa-fw me-3"></i><span>Archives</span>
+          </a>
+
+          
+          <a 
+          href="{% url 'create_news' %}" 
+          class="list-group-item list-group-item-action py-2 "
+          >
+          <i class="fas fa-chart-area fa-fw me-3"></i><span>Create News</span>
+          </a>
+          
+          <a 
+          href="{% url 'user_profile' request.user.username %}" 
+          class="list-group-item list-group-item-action py-2 "
+          >
+          <i class="fas fa-chart-area fa-fw me-3"></i><span>My Profile</span>
+          </a>
+
+          <a 
+          href="{% url 'user_settings' request.user.username %}" 
+          class="list-group-item list-group-item-action py-2 "
+          >
+          <i class="fas fa-chart-area fa-fw me-3"></i><span>Profile Settings</span>
+          </a>
+          
+          <a 
+          href="{% url 'logout_user' %}" 
+          class="list-group-item list-group-item-action py-2 "
+          >
+          <i class="fas fa-chart-area fa-fw me-3"></i><span>Logout</span>
+          </a>
+          
+
+      </div>
+      </div>
+  </nav>
+  <!-- Sidebar -->
+  </header>
+{% endblock %}

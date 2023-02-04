@@ -1,10 +1,19 @@
 {% extends 'base_templates/base.html' %}
+{% block title %} News {% endblock %}
 
-{% block title %} {{username}} {% endblock %}
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        {% include 'base_templates/navbar_loggedin.html' %}
+    {% else %}    
+        {% include 'base_templates/navbar_notloggedin.html' %}
+    {% endif %}
+{% endblock %}
 
 
 {% block body %}
-    Username: {{details.username}}
-    Department: {{details.department}}
-    Designations: {{details.designation}}
+
+
+    User: {{user.username}}  <br>
+    Designation: {{designation}}  <br>
+    department: {{user.department}}  <br>
 {% endblock %}

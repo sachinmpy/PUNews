@@ -1,32 +1,14 @@
 {% extends 'base_templates/base.html' %}
 
+
 {% block title %} Welcome to PUNews!! {% endblock %}
 
-
-
-{% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">PUNews</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login_page' %}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'register_page'%}">Register</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Disabled</a>
-        </li> -->
-      </ul>
-    </div>
-  </nav>
+{% block navbar %} 
+  {% include 'base_templates/navbar_notloggedin.html' %}
 {% endblock %}
 
 <!-- Body -->
+{% block body %}
 
+{% endblock %}
 <!-- Footer -->

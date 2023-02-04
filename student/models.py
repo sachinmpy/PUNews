@@ -13,7 +13,7 @@ class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     current_year = models.IntegerField(
         default=1,
-        validators=[MaxValueValidator(5), MinValueValidator(5)]
+        validators=[MaxValueValidator(5), MinValueValidator(1)]
     )
 
 class Student(User):

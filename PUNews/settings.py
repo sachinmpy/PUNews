@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     #Utility Apps
     'widget_tweaks',
     'crispy_forms',
+    'django_browser_reload',
 
     #User Apps
     'user_models',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'student',
     'news',
     'loginregister',
+    'profile_settings'
 
 ]
 
@@ -60,6 +62,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'PUNews.urls'

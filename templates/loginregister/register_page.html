@@ -3,10 +3,108 @@
 {% block title %} Register {% endblock %}
 
 
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        {% include 'base_templates/navbar_loggedin.html' %}
+    {% else %}    
+        {% include 'base_templates/navbar_notloggedin.html' %}
+    {% endif %}
+{% endblock %}
+
+
 {% block body %}
-<form action="{% url 'register_page' %}" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Register</button>
-</form>
+    <div class="mt-5">
+
+    </div>
+    <div class="w-75 row p-5">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="p-3">Register</h1>
+                </div>
+            </div>
+            
+            {% load widget_tweaks %}
+            <form class="p-3" action="{% url 'register_page' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-outline mb-4">
+                    {% render_field form.username class+='form-control' %}
+                  <!-- <input type="text" id="form3Example3" class="form-control" /> -->
+                  <label class="form-label" for="form3Example3">Username</label>
+                </div>
+                
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row mb-4">
+                  <div class="col">
+                    <div class="form-outline">
+                      <!-- <input type="text" id="form3Example1" class="form-control" /> -->
+                    {% render_field form.first_name class+='form-control' %}
+
+                      <label class="form-label" for="form3Example1">First name</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-outline">
+                      <!-- <input type="text" id="form3Example2" class="form-control" /> -->
+                    {% render_field form.last_name class+='form-control' %}
+
+                      <label class="form-label" for="form3Example2">Last name</label>
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    {% render_field form.email class+='form-control' type='email' %}
+
+                  <!-- <input type="email" id="form3Example3" class="form-control" /> -->
+                  <label class="form-label" for="form3Example3">Email address</label>
+                </div>
+              
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    {% render_field form.password class+='form-control' type='password' %}
+
+                  <!-- <input type="password" id="form3Example4" class="form-control" /> -->
+                  <label class="form-label" for="form3Example4">Password</label>
+                </div>
+            
+                <div class="row mb-4">
+                    <div class="col">
+                      <div class="form-outline">
+                        <!-- <input type="text" id="form3Example1" class="form-control" /> -->
+                        {% render_field form.designation class+='form-select'%}
+                        <!-- <label class="form-label" for="form3Example1">First name</label> -->
+                      </div>
+
+                      <div id="textExample1" class="form-text">
+                        Designation
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-outline">
+                        {% render_field form.department class+='form-select' aria-label=".form-select-lg" %}
+                        <!-- <input type="text" id="form3Example2" class="form-control" /> -->
+                        <!-- <label class="form-label" for="form3Example2">Last name</label> -->
+                      </div>
+                      <div id="textExample1" class="form-text">
+                        Department
+                      </div>
+                    </div>
+                  </div>
+              
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Register</button>
+              
+                <!-- Register buttons -->
+              </form>
+
+        </div>
+
+
+
+        <div class="col-6">
+
+        </div>
+    </div>
 {% endblock %}

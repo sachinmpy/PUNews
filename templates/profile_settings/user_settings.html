@@ -1,0 +1,13 @@
+{% extends 'base_templates/base.html' %}
+
+
+{% block title %} Welcome to PUNews!! {% endblock %}
+
+
+{% block navbar %} 
+{% include 'base_templates/navbar_settings.html' %}
+{% endblock %}
+
+{% block body %}
+    {{user.username}}
+{% endblock %}

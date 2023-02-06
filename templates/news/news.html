@@ -30,6 +30,10 @@
                 <span class="card-title h4">{{news.headline | truncatechars:64}}.</span>
                 {{news.content|truncatechars:256}}</p>
                 <a href="{% url 'view_news' news.news_id %}" class="btn btn-primary">View Story</a>
+                
+                {% if user.designation == 'FACULTY' and user.is_elevated %}
+                <a href="{% url 'delete_news' news.news_id%}" class="btn btn-danger">Delete News</a>
+                {% endif %}
                 </div>
             </div>
         </div>

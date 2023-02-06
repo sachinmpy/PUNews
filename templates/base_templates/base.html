@@ -8,10 +8,10 @@
     <title>{% block title%} {% endblock %}</title>
 
     <!-- Styles and links -->
-    <!-- <link rel="stylesheet" 
+    <link rel="stylesheet" 
             href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
-            crossorigin="anonymous"> -->
+            crossorigin="anonymous">
 
 
     <!-- CSS -->
@@ -32,7 +32,11 @@
     />
 
     <style>
+         @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400&family=Signika&display=swap');
+     
         body {
+            font-family: 'Fira Sans Condensed', sans-serif;
+            font-family: 'Signika', sans-serif;
             background-color: #fbfbfb;
             }
             @media (min-width: 991.98px) {
@@ -71,11 +75,16 @@
             overflow-x: hidden;
             overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
             }
+
+            /* {% block style %}
+            {% endblock %} */
     </style>
 
 </head>
-<body style="background-color: rgb(240, 238, 238);">
-    <div class="container" >
+<!-- <body style="background-color: rgb(240, 238, 238);"> -->
+<body>
+    
+   <div class="container" >
 
         <!-- Navigation Bar -->
         {% block navbar %}

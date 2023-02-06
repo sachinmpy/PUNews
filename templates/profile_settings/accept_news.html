@@ -1,0 +1,41 @@
+{% extends 'base_templates/base.html' %}
+
+
+{% block title %} Welcome to PUNews!! {% endblock %}
+
+
+{% block navbar %} 
+    {% include 'base_templates/navbar_settings.html' %}
+{% endblock %}
+
+{% block body %}
+<div class="display-4">
+    All Pending News for approval
+ </div>
+ <div class="">
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
+ </div>
+ <div class="row row-cols-1 row-cols-md-1 w-24 g-4">
+ {% for news in pending_news %}
+     <div class="col">
+         <div class="card mt-3 shadow-0 bg-white" style="max-width: 50rem;">
+             <h6 class="card-header">
+                 <div class="text-muted fs-6">  
+                 <a href="{% url 'user_profile' news.posted_by %}" class="badge badge-primary fs-6">{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
+                  <span class="lead fs-6">{{news.posted_date | date:"D d M Y"}}  </span></div>
+             </h6>
+             <div class="card-body">
+                 <p class="card-text">
+             <span class="card-title h4">{{news.headline | truncatechars:64}}.</span>
+             {{news.content|truncatechars:256}}</p>
+             <a href="{% url 'view_news' news.news_id %}" class="btn btn-primary">View Story</a>
+             <a href="{% url 'approve_news' news.news_id %}" class="btn btn-info">Approve News</a>
+             <a href="{% url 'delete_news' news.news_id%}" class="btn btn-danger">Delete News</a>
+             </div>
+         </div>
+     </div>
+     {% endfor %}
+ </div>
+{% endblock %}

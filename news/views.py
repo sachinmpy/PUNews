@@ -1,8 +1,9 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .forms import NewsCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import News
 from user_models.models import User
+from django.contrib import messages
 
 import datetime
 
@@ -16,10 +17,10 @@ def indexpage(request):
         user = request.user
         context['user'] = user
 
-        return render(request, 'news/indexpage_loggedin.html', context)
+        return render(request, 'news/indexpage.html', context)
    
     else:
-        return render(request, 'news/indexpage_notloggedin.html', context)
+        return render(request, 'news/indexpage.html', context)
 
 
 def news(request):
@@ -28,7 +29,8 @@ def news(request):
     
     all_news = News.objects.all().filter(
         posted_date__year=today.year,
-        posted_date__month=today.month
+        posted_date__month=today.month,
+        is_approved = True,
     )
     context = {
         'all_news': all_news,
@@ -82,3 +84,28 @@ def archives(request):
         'all_news': news,
     }
     return render(request, 'news/archives.html', context)
+
+def approve_news(request, news_id):
+    user = request.user
+
+    if request.user.is_authenticated and user.designation == User.Designations.FACULTY and user.is_elevated:
+        news = News.objects.get(news_id=news_id)
+        news.is_approved = True
+        news.save()
+
+        messages.success(request, 'News Approved!!')
+        return redirect('accept_news')  
+
+    return HttpResponse('You are not Authenticated to Approve News!!')
+
+def delete_news(request, news_id):
+    user = request.user
+
+    if request.user.is_authenticated and user.designation == User.Designations.FACULTY and user.is_elevated:
+        news = News.objects.get(news_id=news_id)
+        news.delete()
+
+        messages.success(request, 'News Deleted!!')
+        return redirect('accept_news')  
+
+    return HttpResponse('You are not Authenticated to Delete News!!')

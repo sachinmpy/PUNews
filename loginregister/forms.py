@@ -7,6 +7,7 @@ class UserRegisterForm(ModelForm):
         model = User
         fields = ('username', 'email', 'password', 'first_name', 'last_name', 'designation', 'department')
         # fields = '__all__'
+        
 
 class UserLoginForm(ModelForm):
 

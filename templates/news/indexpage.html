@@ -1,0 +1,68 @@
+{% extends 'base_templates/base.html' %}
+
+
+{% block title %} Welcome to PUNews!! {% endblock %}
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        {% include 'base_templates/navbar_loggedin.html' %}
+    {% else %}    
+        {% include 'base_templates/navbar_notloggedin.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block style %}
+
+ 
+{% endblock %}
+
+<!-- Body -->
+{% block body %}
+  
+<div class="container-fluid p-10">
+  <div class="row p-x-5">
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
+          <div class="row">
+              <p class="text-end text-primary fw-bold display-3">Parul News</p> 
+              <p  class="fs-4 text-end p-x-t-5 ">
+                  A Place for us, students and faculties of Parul University to share 
+                  news and happenings in University.
+                  If you want to know what is happening in university and what is where
+                  you are at great place, here you can find people talking day to day life
+                  of the university.
+              </p>
+          </div>
+      </div>
+      <div class="col">
+          <img src="https://i.imgur.com/ET2LCjI.png" class="img-fluid rounded width-auto" alt="Wild Landscape" />
+      </div>
+  </div>
+
+  <div class="row my-3">
+    <p class="text-center display-2">Things You Can Do Here</p>
+  </div>
+  
+  <div class="row my-3">
+    <p></p>
+  </div>
+
+  <div class="row">
+      
+      <div class="row rounded-9" style="height: auto; background: rgba(222, 220, 220, 0.349);">
+          <div class="col-md-7">
+              <img src="https://i.imgur.com/PTNxJiI.png" class="img-fluid rounded width-auto" alt="Wild Landscape" />
+          </div>
+          <div class="col-md-4 d-flex align-items-left justify-content-center flex-column">
+              <p class="text-start display-6">Buy Things and See Requests</p>
+              <p class="text-start">
+                  This is our main store, you can see there every product and request listed and you can also search for products
+              </p>
+
+              <a href="" class="p-3 btn btn-lg bg-gradient" style="background-color: rgb(31, 79, 223); color: white; font-weight: bold;" role="button">Buy Now!!</a>
+          </div>
+      </div>
+      <div class="col-md-1"></div>
+
+</div>
+{% endblock %}
+<!-- Footer -->

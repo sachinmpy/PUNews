@@ -17,7 +17,7 @@ banner_urls = [
 def user_profile(request, usrname): #HINT: LOOK FOR MAL OR ANILIST
     user = User.objects.get(username=usrname)
     designation = user.designation
-    all_news = News.objects.all().filter(posted_by=user)
+    all_news = News.objects.all().filter(posted_by=user, is_approved=True)
     
     context = {
         'user': user,

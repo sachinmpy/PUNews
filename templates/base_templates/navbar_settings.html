@@ -9,7 +9,8 @@
               class="list-group-item list-group-item-action py-2 "
               aria-current="true"
               >
-              <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Home</span>
+              <i class="fa-solid fa-house me-3"></i><span>Home</span>
+
             </a>
             
             <h5 class="list-group-item list-group-item-action py-2 mt-5"> Your Settings</h5>
@@ -19,20 +20,20 @@
             href="{% url 'user_settings' %}" 
             class="list-group-item list-group-item-action py-2 "
             >
-            <i class="fas fa-chart-area fa-fw me-3"></i><span>Edit Profile</span>
+            <i class="fa-solid fa-pen-to-square me-3"></i></i><span>Edit Profile</span>
             </a>
             <a 
             href="{% url 'my_news' %}" 
             class="list-group-item list-group-item-action py-2 "
             > 
-            <i class="fas fa-chart-area fa-fw me-3"></i><span>My News</span>
+            <i class="fa-sharp fa-solid fa-newspaper me-3"></i><span>My News</span>
         </a>
         
         <a 
         href="{% url 'my_posts' %}" 
         class="list-group-item list-group-item-action py-2 "
         >
-          <i class="fas fa-heart fa-solid me-3"></i><span>My Posts</span>
+          <i class="fa-solid fa-comment me-3"></i><span>My Posts</span>
           </a>
 
           
@@ -40,14 +41,14 @@
           href="{% url 'followers' %}" 
           class="list-group-item list-group-item-action py-2 "
           >
-          <i class="fas fa-chart-area fa-fw me-3"></i><span>Followers</span>
+          <i class="fa-solid fa-heart me-3"></i><span>Followers</span>
           </a>
           
           <a 
           href="{% url 'following' %}" 
           class="list-group-item list-group-item-action py-2 "
           >
-          <i class="fas fa-chart-area fa-fw me-3"></i><span>Following</span>
+          <i class="fa-solid fa-plus me-3"></i></i><span>Following</span>
           </a>
           
           {% if user.designation == 'FACULTY' and user.is_elevated %}
@@ -55,7 +56,7 @@
           href="{% url 'accept_news' %}" 
           class="list-group-item list-group-item-action py-2 "
           >
-          <i class="fas fa-chart-area fa-fw me-3"></i><span>Accept News</span>
+          <i class="fa-solid fa-square-check me-3"></i><span>Accept News</span>
           </a>
           {% endif %}
 
@@ -63,7 +64,8 @@
           href="{% url 'logout_user' %}" 
           class="list-group-item list-group-item-action py-2 "
           >
-          <i class="fas fa-chart-area fa-fw me-3"></i><span>Logout</span>
+          <i class="fa-solid fa-right-from-bracket me-3 text-danger"></i><span class="text-danger">Logout</span>
+
           </a>
           
 

@@ -1,11 +1,60 @@
 {% extends 'base_templates/base.html' %}
 
+{% block title %} Welcome to PUNews!! {% endblock %}
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        {% include 'base_templates/navbar_loggedin.html' %}
+    {% else %}    
+        {% include 'base_templates/navbar_notloggedin.html' %}
+    {% endif %}
+{% endblock %}
+
 
 {% block body %}
-<form action="" method="post">
-    {% csrf_token %}
 
-    {{form}}
-    <button type="submit">Submit</button>
-</form>
+    <!-- <h3 class="my-5">Create Your News Here</h3> -->
+    <!-- <hr> -->
+
+    <div class="mt-4 text-muted">
+        by
+        <span class="h5 text-primary">
+             @{{user.username}} 
+        </span>
+        <span class="h6">{{date}}</span>
+    </div>
+
+    {% load widget_tweaks %}
+    <form action="{% url 'create_news' %}" method="post" class="mt-1">
+        {% csrf_token %}
+        
+        <h1 class="h1 ">Headline for your News </h1>
+        <div class="form-outline mb-4">
+             {% render_field form.headline class+='form-control p-3 fs-4' %}
+        </div>
+
+        <span class="h1">Banner Url</span> <span class="text-muted">banner image link of your news</span>
+        <div class="form-outline mb-4">
+             {% render_field form.link_to_banner class+='form-control p-3 fs-4' %}
+        </div>
+
+        <span class="h1">Content</span> <span class="text-muted"> learn more on how to use </span> <a href="#">click here </a> 
+        <div class="form-outline mb-4">
+             {% render_field form.content class+='form-control p-3 fs-4' %}
+        </div>
+        
+        <span class="h1">Department</span> <span class="text-muted"> targeted department</span>
+        <div class="form-outline">
+            {% render_field form.department class+='form-select p-3 fs-4'%}
+        </div>
+        
+        <div class="form-outline">
+            {% render_field form.posted_by class+='form-select invisible'%}
+        </div>
+        
+
+        <h6 class="text-muted mt-5">read the news <a href="#">approval process </a></h6>
+
+        <button type="submit" class="btn btn-lg btn-secondary">Submit</button>
+    </form> 
 {% endblock %}

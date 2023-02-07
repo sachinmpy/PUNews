@@ -18,10 +18,20 @@ def user_settings(request):
 @login_required(login_url='login_page')
 def my_news(request):
     user = request.user
-    
+    approved_news = News.objects.all().filter(
+        posted_by = user,
+        is_approved = True
+    )
+
+    unapproved_news = News.objects.all().filter(
+        posted_by = user,
+        is_approved = False
+    )
 
     context = {
         'user': user,
+        'approved_news': approved_news,
+        'unapproved_news': unapproved_news,
     }    
 
     return render(request, 'profile_settings/my_news.html', context)

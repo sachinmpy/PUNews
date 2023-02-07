@@ -54,10 +54,7 @@ def view_news(request, news_id):
 @login_required(login_url='login_page')
 def create_news(request):
     user = request.user
-    form = NewsCreationForm(initial={
-        'posted_by': user,
-    })
-
+    form = NewsCreationForm(initial={'posted_by': user},instance=user)
 
     if request.method == 'POST':
         form = NewsCreationForm(request.POST)
@@ -68,7 +65,9 @@ def create_news(request):
             return HttpResponse("Error")
     
     context = {
+        'user': user,
         'form': form,
+        'date': datetime.date.today(),
     }
     return render(request, 'news/news_creation.html', context)
 
@@ -91,6 +90,7 @@ def approve_news(request, news_id):
     if request.user.is_authenticated and user.designation == User.Designations.FACULTY and user.is_elevated:
         news = News.objects.get(news_id=news_id)
         news.is_approved = True
+        news.approved_by = user
         news.save()
 
         messages.success(request, 'News Approved!!')
@@ -107,5 +107,12 @@ def delete_news(request, news_id):
 
         messages.success(request, 'News Deleted!!')
         return redirect('accept_news')  
+
+    news = News.objects.get(news_id=news_id)
+    if request.user.is_authenticated and news.posted_by == user:
+        news.delete()
+
+        messages.success(request, 'News Deleted!!')
+        return redirect('my_news')  
 
     return HttpResponse('You are not Authenticated to Delete News!!')

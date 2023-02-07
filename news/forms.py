@@ -9,4 +9,9 @@ class NewsCreationForm(ModelForm):
     # posted_by = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'True'}))
     class Meta:
         model = News
-        exclude = ('approved_by', 'is_approved')
+        fields = ('posted_by','headline', 'content', 'department', 'link_to_banner')
+        widgets = {
+            'posted_by': forms.TextInput(attrs={
+                'readonly': True,
+            })
+        }

@@ -10,100 +10,111 @@
 
 {% block body %}
 
-<div class="mt-5"></div>
+<div class=""></div>
 
-<div class="row">
+<div class="row  border border-1 border-dark p-3 bg-light">
     <h1 class="display-6">
         All News by {{user}}
     </h1>
 </div>
 
-<div class="row mt-5">
+<div class="row mt-3 ">
 
     <!-- Pills navs -->
-<ul class="nav nav-pills mb-3" id="ex1" role="tablist">
-<li class="nav-item" role="presentation">
-  <a
-    class="nav-link active"
-    id="ex1-tab-1"
-    data-mdb-toggle="pill"
-    href="#ex1-pills-1"
-    role="tab"
-    aria-controls="ex1-pills-1"
-    aria-selected="true"
-    >Approved News</a
-  >
-</li>
-<li class="nav-item" role="presentation">
-  <a
-    class="nav-link"
-    id="ex1-tab-2"
-    data-mdb-toggle="pill"
-    href="#ex1-pills-2"
-    role="tab"
-    aria-controls="ex1-pills-2"
-    aria-selected="false"
-    >Unapporved News</a
-  >
-</li>
-</ul>
-<hr>
+    <div class="border border-1 border-dark px-3 p-1 " style="background-color: #ffd300;">
+
+      <ul class="nav nav-pills" id="ex1" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link active rounded-0 border border-1 border-dark p-3 bg-light"
+          id="ex1-tab-1"
+          data-mdb-toggle="pill"
+          href="#ex1-pills-1"
+          role="tab"
+          aria-controls="ex1-pills-1"
+          aria-selected="true"
+          >Approved News</a
+        >
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link rounded-0 border border-1 border-dark p-3 bg-light"
+          id="ex1-tab-2"
+          data-mdb-toggle="pill"
+          href="#ex1-pills-2"
+          role="tab"
+          aria-controls="ex1-pills-2"
+          aria-selected="false"
+          >Unapporved News</a
+        >
+      </li>
+      </ul>
+    </div>
 <!-- Pills navs -->
 
 <!-- Pills content -->
-<div class="tab-content" id="ex1-content">
+<div class="tab-content border border-1 border-dark p-4 pattern-polka-v2 bg-light mt-3" id="ex1-content">
 <div
   class="tab-pane fade show active"
   id="ex1-pills-1"
   role="tabpanel"
   aria-labelledby="ex1-tab-1"
 >
-    <div class="display-6">
+    <div class="display-6 mb-3 border border-1 border-dark p-3" style="background-color: #fff0e5;">
         All Approved news of {{user.username|capfirst}}
     </div>
-    <div class="row row-cols-1 mt-3 row-cols-md-1 w-50 g-4">
-        {% for news in approved_news %}
-        <div class="card rounded-0 text-white" style="background-color:#404258;">
-            <div class="card-header">
-                <div class="text-muted fs-6">  
-                    <a href="{% url 'user_profile' news.posted_by %}" class="badge rounded-0 badge-light fs-6">{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
-                    <span class="lead fs-6">{{news.posted_date | date:"D d M Y"}}  </span>
-                </div>
-            </div>
-            <div class="card-body">
-                <p class="card-text">
-                    <span class="card-title h4 fw-bold">{{news.headline | truncatechars:64}}.</span>
-                    {{news.content|truncatechars:256}}</p>
-                    <a href="{% url 'view_news' news.news_id %}" class="btn btn-primary">View Story</a>
-                    
-            </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for news in approved_news %}
+      <div class="col rounded-0 ">
+          <div class="card rounded-0 border border-dark" style="height: 485px; width: 395px;">
+          <img src="{{news.link_to_banner}}" class="object-cover object-center card-img-top rounded-0 border-bottom border-dark" style="height: 230px;"/>
+          
+          <div class="card-body">
+              <a href="{% url 'view_news' news.news_id %}" class="fw-bolder text-black"><span class="card-title h5">{{news.headline | truncatechars:64}}</span></a>
+              
+              <p class="text-muted">{{news.posted_date | date:"D d M Y"}} | by 
+                  <a href="{% url 'user_profile' news.posted_by %}" class="text-right rounded-0 fs-6">@{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
+              </p>
+              <hr>
+              <p class="card-text">
+                  {{news.introduction}}
+              </p>
           </div>
-        {% endfor %}
-        </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>  
+
 </div>
 
 
 <div class="tab-pane fade" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-    <div class="row row-cols-1 mt-3 row-cols-md-1 w-50 g-4">
-        {% for news in unapproved_news %}
-        <div class="card rounded-0 text-white" style="background-color:#404258;">
-            <div class="card-header">
-                <div class="text-muted fs-6">  
-                    <a href="{% url 'user_profile' news.posted_by %}" class="badge rounded-0 badge-light fs-6">{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
-                    <span class="lead fs-6">{{news.posted_date | date:"D d M Y"}}  </span>
-                </div>
-            </div>
-            <div class="card-body">
-                <p class="card-text">
-                    <span class="card-title h4 fw-bold">{{news.headline | truncatechars:64}}.</span>
-                    {{news.content|truncatechars:256}}</p>
-                    <a href="{% url 'view_news' news.news_id %}" class="btn btn-primary">View Story</a>
-                    <a href="{% url 'delete_news' news.news_id %}" class="btn btn-danger">Delete News</a>
-                    
-            </div>
-          </div>
-        {% endfor %}
+
+  <div class="display-6 mb-3 border border-1 border-dark p-3 bg-light">
+    All Unapproved news of {{user.username|capfirst}}
+  </div>    
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for news in unapproved_news %}
+    <div class="col rounded-0 ">
+        <div class="card rounded-0 border border-dark" style="height: 485px; width: 395px;">
+        <img src="{{news.link_to_banner}}" class="object-cover object-center card-img-top rounded-0 border-bottom border-dark" style="height: 230px;"/>
+        
+        <div class="card-body">
+            <a href="{% url 'view_news' news.news_id %}" class="fw-bolder text-black"><span class="card-title h5">{{news.headline | truncatechars:64}}</span></a>
+            
+            <p class="text-muted">{{news.posted_date | date:"D d M Y"}} | by 
+                <a href="{% url 'user_profile' news.posted_by %}" class="text-right rounded-0 fs-6">@{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
+            </p>
+            <hr>
+            <p class="card-text">
+                {{news.introduction}}
+            </p>
         </div>
+        </div>
+    </div>
+    {% endfor %}
+  </div>  
 </div>
 </div>
 <!-- Pills content -->

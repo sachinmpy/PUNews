@@ -31,7 +31,8 @@ def news(request):
         posted_date__year=today.year,
         posted_date__month=today.month,
         is_approved = True,
-    )
+    )[::-1]
+
     context = {
         'all_news': all_news,
         'current_month': months[today.month]
@@ -45,9 +46,10 @@ def news(request):
 
 def view_news(request, news_id):
     news = News.objects.get(news_id=news_id)
-
+    user = request.user
     context = {
-        'news': news
+        'news': news,
+        'user': user,
     }
     return render(request, 'news/news_read.html', context)
 

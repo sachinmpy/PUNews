@@ -13,29 +13,29 @@
 
 {% block body %}
 <div class="display-4">
+    ARCHIVES WORK NEEDS TO BE DONE HERE
 </div>
 
-<div class="row row-cols-1 mt-3 row-cols-md-1 w-50 g-4">
+<div class="row row-cols-1 row-cols-md-3 g-4">
     {% for news in all_news %}
-    <div class="card rounded-0 text-white" style="background-color:#404258;">
-        <div class="card-header">
-            <div class="text-muted fs-6">  
-                <a href="{% url 'user_profile' news.posted_by %}" class="badge rounded-0 badge-light fs-6">{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
-                <span class="lead fs-6">{{news.posted_date | date:"D d M Y"}}  </span>
-            </div>
-        </div>
+    <div class="col rounded-0 ">
+        <div class="card rounded-0 border border-dark" style="height: 485px; width: 395px;">
+        <img src="{{news.link_to_banner}}" class="object-cover object-center card-img-top rounded-0 border-bottom border-dark" style="height: 230px;"/>
+        
         <div class="card-body">
+            <a href="{% url 'view_news' news.news_id %}" class="fw-bolder text-black"><span class="card-title h5">{{news.headline | truncatechars:64}}</span></a>
+            
+            <p class="text-muted">{{news.posted_date | date:"D d M Y"}} | by 
+                <a href="{% url 'user_profile' news.posted_by %}" class="text-right rounded-0 fs-6">@{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
+            </p>
+            <hr>
             <p class="card-text">
-                <span class="card-title h4 fw-bold">{{news.headline | truncatechars:64}}.</span>
-                {{news.content|truncatechars:256}}</p>
-                <a href="{% url 'view_news' news.news_id %}" class="btn btn-primary">View Story</a>
-                
-                {% if user.designation == 'FACULTY' and user.is_elevated %}
-                <a href="{% url 'delete_news' news.news_id%}" class="btn btn-danger">Delete News</a>
-                {% endif %}
+                {{news.introduction}}
+            </p>
         </div>
-      </div>
-    {% endfor %}
+        </div>
     </div>
+    {% endfor %}
+</div>  
 
 {% endblock %}

@@ -12,88 +12,88 @@
 
 {% block body %}
     <div class="mt-5"></div>
-    <div class="banner" style="height: 30vh; background-image: url({{banner}});"">
 
-    </div>
-    <div class="banner row mt-5">
-        <div class="col-4 bg-light border-end display-flex ">
+    <div class="banner row mt-5 pattern-polka-v2 border rounded-0 border-dark border-1">
+        <div class="col-4 bg-light border-end display-flex p-4">
             <h1 class="display-4 fw-bold">{{user.first_name | capfirst}}</h1>
             <h1 class="display-4 fw-bold">{{user.last_name | capfirst}}</h1>
             <h5 class="text-primary">@{{user.username}} <span class="badge badge-primary">{{user.designation}}</span></h5>
             <span class="text-muted fs-6">Department:</span> <span class="fs-4 fw-bold">{{user.department}}</span>
         </div>
+        <div class="col-8 h-100">
+
+        </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="row mt-5 ">
 
         <!-- Pills navs -->
-<ul class="nav nav-pills mb-3" id="ex1" role="tablist">
-    <li class="nav-item" role="presentation">
-      <a
-        class="nav-link active"
-        id="ex1-tab-1"
-        data-mdb-toggle="pill"
-        href="#ex1-pills-1"
-        role="tab"
-        aria-controls="ex1-pills-1"
-        aria-selected="true"
-        >News</a
-      >
-    </li>
-    <li class="nav-item" role="presentation">
-      <a
-        class="nav-link"
-        id="ex1-tab-2"
-        data-mdb-toggle="pill"
-        href="#ex1-pills-2"
-        role="tab"
-        aria-controls="ex1-pills-2"
-        aria-selected="false"
-        >Posts</a
-      >
-    </li>
-  </ul>
-  <hr>
+      <ul class="nav nav-pills ms-0 mb-3 border rounded-0 border-dark border-1 p-2" id="ex1" role="tablist" style="background-color: #ffd300;">
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link active rounded-0 border-1 border border-dark"
+              id="ex1-tab-1"
+              data-mdb-toggle="pill"
+              href="#ex1-pills-1"
+              role="tab"
+              aria-controls="ex1-pills-1"
+              aria-selected="true"
+              >News</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link rounded-0 border-1 border border-dark"
+              id="ex1-tab-2"
+              data-mdb-toggle="pill"
+              href="#ex1-pills-2"
+              role="tab"
+              aria-controls="ex1-pills-2"
+              aria-selected="false"
+              >Posts</a
+            >
+          </li>
+        </ul>
   <!-- Pills navs -->
   
   <!-- Pills content -->
-  <div class="tab-content" id="ex1-content">
-    <div
-      class="tab-pane fade show active"
-      id="ex1-pills-1"
-      role="tabpanel"
-      aria-labelledby="ex1-tab-1"
-    >
-        <div class="display-6">
-            All news by {{user.username|capfirst}}
-        </div>
-        <div class="row row-cols-1 mt-3 row-cols-md-1 w-50 g-4">
-          {% for news in all_news %}
-          <div class="card rounded-0 text-white" style="background-color:#404258;">
-              <div class="card-header">
-                  <div class="text-muted fs-6">  
-                      <a href="{% url 'user_profile' news.posted_by %}" class="badge rounded-0 badge-light fs-6">{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
-                      <span class="lead fs-6">{{news.posted_date | date:"D d M Y"}}  </span>
-                  </div>
+        <div class="tab-content p-3 bg-light border border-1 border-dark rounded-0 pattern-polka-v2" id="ex1-content">
+          <div
+            class="tab-pane fade show active"
+            id="ex1-pills-1"
+            role="tabpanel"
+            aria-labelledby="ex1-tab-1"
+          >
+              <div class="display-6 p-3 m-3 border border-1 border-dark" style="background-color: #fff0e5;">
+                  All news by {{user.username|capfirst}}
               </div>
-              <div class="card-body">
-                  <p class="card-text">
-                      <span class="card-title h4 fw-bold">{{news.headline | truncatechars:64}}.</span>
-                      {{news.content|truncatechars:256}}</p>
-                      <a href="{% url 'view_news' news.news_id %}" class="btn btn-primary">View Story</a>
-                      
-                      {% if user.designation == 'FACULTY' and user.is_elevated %}
-                      <a href="{% url 'delete_news' news.news_id%}" class="btn btn-danger">Delete News</a>
-                      {% endif %}
-              </div>
-            </div>
-          {% endfor %}
+              <div class="row row-cols-1 p-3 row-cols-md-3 g-4">
+                {% for news in all_news %}
+                <div class="col rounded-0 ">
+                    <div class="card rounded-0 border border-dark" style="height: 485px; width: 395px;">
+                    <img src="{{news.link_to_banner}}" class="object-cover object-center card-img-top rounded-0 border-bottom border-dark" style="height: 230px;"/>
+                    
+                    <div class="card-body">
+                        <a href="{% url 'view_news' news.news_id %}" class="fw-bolder text-black"><span class="card-title h5">{{news.headline | truncatechars:64}}</span></a>
+                        
+                        <p class="text-muted">{{news.posted_date | date:"D d M Y"}} | by 
+                            <a href="{% url 'user_profile' news.posted_by %}" class="text-right rounded-0 fs-6">@{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
+                        </p>
+                        <hr>
+                        <p class="card-text">
+                            {{news.introduction}}
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>  
+
+          </div>
+          <div class="tab-pane fade" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+            Tab 2 content
+          </div>
         </div>
-    </div>
-    <div class="tab-pane fade" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-      Tab 2 content
-    </div>
-  </div>
   <!-- Pills content -->
     </div>
 

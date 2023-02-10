@@ -9,7 +9,7 @@ class NewsCreationForm(ModelForm):
     # posted_by = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'True'}))
     class Meta:
         model = News
-        fields = ('posted_by','headline', 'content', 'department', 'link_to_banner')
+        fields = ('posted_by','headline', 'content', 'department', 'link_to_banner', 'introduction')
         widgets = {
             'posted_by': forms.TextInput(attrs={
                 'readonly': True,

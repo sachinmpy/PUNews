@@ -10,19 +10,34 @@
     {% endif %}
 {% endblock %}
 
+{% block style %}
+    <style>
+        .django-ckeditor-widget{
+            width: 100%;
+        }
+        .fill-white{
+            background-color: white;
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+        }
+    </style>
+{% endblock %}
+
 
 {% block body %}
 
     <!-- <h3 class="my-5">Create Your News Here</h3> -->
     <!-- <hr> -->
 
-    <div class="mt-4 text-muted">
+    <div class=" text-muted">
         by
         <span class="h5 text-primary">
              @{{user.username}} 
         </span>
         <span class="h6">{{date}}</span>
     </div>
+
 
     {% load widget_tweaks %}
     <form action="{% url 'create_news' %}" method="post" class="mt-1">
@@ -32,17 +47,24 @@
         <div class="form-outline mb-4">
              {% render_field form.headline class+='form-control p-3 fs-4' %}
         </div>
-
-        <span class="h1">Banner Url</span> <span class="text-muted">banner image link of your news</span>
+        
+        <span class="h1">Banner Url</span> <span class="text-muted"></span>
         <div class="form-outline mb-4">
-             {% render_field form.link_to_banner class+='form-control p-3 fs-4' %}
+             {% render_field form.link_to_banner class+='form-control p-3 fs-4' placeholder='url link of your banner'%}
+        </div>
+
+        <span class="h1">Introduction</span> <span class="text-muted">100 character limit  </span>
+        <div class="form-outline mb-4">
+             {% render_field form.introduction class+='form-control p-3 fs-4' placeholder+='This will be first shown to user, write something that generates interest in the news post' type='text-area' %}
         </div>
 
         <span class="h1">Content</span> <span class="text-muted"> learn more on how to use </span> <a href="#">click here </a> 
         <div class="form-outline mb-4">
+            {{form.media}}
              {% render_field form.content class+='form-control p-3 fs-4' %}
         </div>
         
+
         <span class="h1">Department</span> <span class="text-muted"> targeted department</span>
         <div class="form-outline">
             {% render_field form.department class+='form-select p-3 fs-4'%}

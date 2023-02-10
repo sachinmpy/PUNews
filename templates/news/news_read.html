@@ -14,24 +14,64 @@
 {% block body %}
     
     {% if news.link_to_banner is not None %}
-        <div class="banner bg-image d-flex justify-content-center align-items-center" style="height: 330px; background-image: url({{news.link_to_banner}});" >
+        <div class="banner bg-image d-flex justify-content-center align-items-center border border-1 border-dark" style="height: 330px; background-image: url({{news.link_to_banner}});" >
         </div>
     {% endif %}
-    <div style="background-color: white;">
+    <div class="border border-1 border-dark mt-3" style="background-color: white;">
 
-        <div class="headline px-5 pt-5 mt-3 " style="background-color: white;">
+        <div class="headline px-5 pt-5 " style="background-color: white;">
             
             <span class="display-5 fw-bold" style="max-width: 50rem;"> {{news.headline}} </span> <br>
             <span>
-                <a href="{% url 'user_profile' news.posted_by %}" class="badge badge-primary fs-6">{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
+                by <a href="{% url 'user_profile' news.posted_by %}" class="badge badge-primary fs-6">{{news.posted_by.first_name | capfirst}} {{news.posted_by.last_name | capfirst}} </a>
             </span>
             <span class="lead fs-6">{{news.posted_date | date:"D d M Y"}}  </span>
     
-    
+            <hr>
             
         </div>
         <div class="p-5"  style="background-color: white; width: 50rem;">
-            {{news.content}}
+            {{news.content|safe}}
         </div>
     </div>
+    
+    {% if user.is_authenticated and user == news.posted_by or user.is_elevated %}
+    <div class="border border-1 border-dark mt-3">
+        <div class="headline px-5 pt-3" style="background-color: #ffd300;">
+            
+            <span class="display-5 fw-bold" style="max-width: 50rem;"> Moderation</span>
+            
+            <span>
+                You can, approve or delete this post
+            </span>
+            <hr>
+            
+            <div class="py-3"  style="">
+                {% if user.is_elevated and not news.is_approved %}
+                <a
+                    class="btn-lg px-3 rounded-0 border border-dark border-1 me-4 text-white"
+                    
+                    href="{% url 'approve_news' news.news_id %}"
+                    style="background-color: #0ca678;"
+                    ><i class="fa-solid fa-thumbs-up"></i></i
+                    > Approve </a>
+                {% endif %}    
+                
+                {% if user == news.posted_by or user.is_elevated %}
+
+                <a
+                    class="btn-lg px-3 rounded-0 border border-dark border-1 me-4 text-white"
+                    href="{% url 'delete_news' news.news_id %}"
+                    role="button"
+                    style="background-color: #ff0000;"
+                    ><i class="fa-solid fa-trash"></i
+                    > Delete </a>
+                
+                {% endif %}    
+                
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}

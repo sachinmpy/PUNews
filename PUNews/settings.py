@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'django_browser_reload',
-
+    'ckeditor',
+    
     #User Apps
     'user_models',
     'faculty',
@@ -143,3 +144,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user_models.User'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'width': 'full', 
+    },
+}

@@ -50,7 +50,7 @@ def my_posts(request):
 @login_required(login_url='login_page')
 def followers(request):
     user = request.user
-
+    
 
     context = {
         'user': user,

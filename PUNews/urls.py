@@ -11,5 +11,6 @@ urlpatterns = [
     path('', include('loginregister.urls')),
     path('', include('user_models.urls')),
     path('', include('profile_settings.urls')),
+    path('', include('posts.urls')),
     
 ]

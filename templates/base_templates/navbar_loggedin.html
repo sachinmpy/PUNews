@@ -14,51 +14,65 @@
           </a>
           
           <h5 class="list-group-item py-2 mt-5">Community</h5>
-
-
+          
+          
           <a 
           href="{% url 'news' %}" 
           class="list-group-item list-group-item-action py-2 "
           >
           <i class="fa-sharp fa-solid fa-newspaper me-3"></i><span>News</span>
-          </a>
-          
-          <a 
-          href="#" 
-          class="list-group-item list-group-item-action py-2 "
-          >
-          <i class="fa-solid fa-comment me-3"></i></i><span>Global Feed</span>
-          </a>
-
-          <a 
-          href="{% url 'archives' %}" 
+        </a>
+        
+        <a 
+        href="{% url 'global_feed' %}" 
+        class="list-group-item list-group-item-action py-2 "
+        >
+        <i class="fa-solid fa-comment me-3"></i></i><span>Global Feed</span>
+      </a>
+      
+      <a 
+      href="#" 
+      class="list-group-item list-group-item-action py-2 "
+      >
+      <i class="fa-solid fa-comments me-3"></i></i><span>My Feed</span>
+    </a>
+    
+    <a 
+    href="{% url 'archives' %}" 
           class="list-group-item list-group-item-action py-2 "
           >
           <i class="fa-sharp fa-solid fa-file-zipper me-3"></i><span>Archives</span>
-          </a>
+        </a>
+        
+        <h5 class="list-group-item py-2 mt-5">Create</h5>
+        
+        <a 
+        href="{% url 'create_news' %}" 
+        class="list-group-item list-group-item-action py-2 "
+        >
+        <i class="fa-sharp fa-solid fa-feather-pointed me-3"></i><span>Create News</span>
+      </a>
+        <!-- <a 
+        href="#" 
+        class="list-group-item list-group-item-action py-2 "
+        >
+        <i class="fa-solid fa-pen me-3"></i><span>Write Post</span>
+      </a> -->
+        
+        <h5 class="list-group-item py-2 mt-5">Profile</h5>
 
-          
-          <a 
-          href="{% url 'create_news' %}" 
-          class="list-group-item list-group-item-action py-2 "
-          >
-          <i class="fa-sharp fa-solid fa-feather-pointed me-3"></i><span>Create News</span>
-          </a>
-          
-          <h5 class="list-group-item py-2 mt-5">Profile</h5>
+        
+        <a 
+        href="{% url 'user_profile' request.user.username %}" 
+        class="list-group-item list-group-item-action py-2 "
+        >
+        <i class="fa-sharp fa-solid fa-user me-3"></i></i><span>My Profile</span>
+      </a>
 
-
-          <a 
-          href="{% url 'user_profile' request.user.username %}" 
-          class="list-group-item list-group-item-action py-2 "
-          >
-          <i class="fa-sharp fa-solid fa-user me-3"></i></i><span>My Profile</span>
-          </a>
-
-          <a 
-          href="{% url 'user_settings' %}" 
-          class="list-group-item list-group-item-action py-2 "
-          >
+      <a 
+      href="{% url 'user_settings' %}" 
+      class="list-group-item list-group-item-action py-2 "
+      >
           <i class="fa-sharp fa-solid fa-gear me-3"></i><span>Profile Settings</span>
           </a>
           

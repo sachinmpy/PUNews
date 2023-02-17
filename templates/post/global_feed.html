@@ -1,0 +1,29 @@
+{% extends 'base_templates/base.html' %}
+
+{% block title %} Welcome to PUNews!! {% endblock %}
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        {% include 'base_templates/navbar_loggedin.html' %}
+    {% else %}    
+        {% include 'base_templates/navbar_notloggedin.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    <form action="#" method="post" class="border border-dark p-3 border-1">
+        {% csrf_token %}
+        {{form}}
+    </form>
+
+    <div class="">
+        {% for post in global_posts %}
+            {{post.posted_by}}| {{post.content}} | {{post.is_global}}
+            <br>    
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}

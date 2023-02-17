@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'student',
     'news',
     'loginregister',
-    'profile_settings'
+    'profile_settings',
+    'posts'
 
 ]
 

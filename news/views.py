@@ -62,7 +62,7 @@ def create_news(request):
         form = NewsCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse("News Posted")
+            return redirect("my_news")
         else:
             return HttpResponse("Error")
     
@@ -79,7 +79,7 @@ def archives(request):
     month = months[today.month]
     year = today.year
 
-    news = News.objects.all()
+    news = News.objects.all().filter(is_approved=True)
 
     context = {
         'all_news': news,
@@ -89,7 +89,7 @@ def archives(request):
 def approve_news(request, news_id):
     user = request.user
 
-    if request.user.is_authenticated and user.designation == User.Designations.FACULTY and user.is_elevated:
+    if request.user.is_authenticated and user.designation == User.Designations.FACULTY:
         news = News.objects.get(news_id=news_id)
         news.is_approved = True
         news.approved_by = user
@@ -103,7 +103,7 @@ def approve_news(request, news_id):
 def delete_news(request, news_id):
     user = request.user
 
-    if request.user.is_authenticated and user.designation == User.Designations.FACULTY and user.is_elevated:
+    if request.user.is_authenticated and user.designation == User.Designations.FACULTY:
         news = News.objects.get(news_id=news_id)
         news.delete()
 

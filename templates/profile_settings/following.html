@@ -7,3 +7,42 @@
 {% block navbar %} 
 {% include 'base_templates/navbar_settings.html' %}
 {% endblock %}
+
+{% block body %}
+
+<div class="row  border border-1 border-dark p-3 bg-light">
+    <h1 class="display-6">
+        Followings
+    </h1>
+</div>
+
+
+<div class="row mt-3 border border-1 border-dark pb-4 bg-light">
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 0px;margin-right: 0px;margin-left: 0px;">
+        {% for following in all_following %}
+        
+        <div class="col">
+            
+            <div class="card border-1 border rounded-0 border-dark">
+                <div class="card-body row" style="padding: 0px; margin: 0px;">
+                    <a href="{% url 'user_profile' following.following_user_id %}" class="col-8">
+                        <p class="card-text text-center text-dark fw-bold fs-5 p-3 bg-light">
+                            {{following.following_user_id|capfirst}}
+                        </p>      
+                    </a>
+                    <a href="{% url 'unfollow' following.following_user_id %}" style="background-color: rgb(255, 255, 255);" class="col-4 p-3 bg-danger text-white text-center">
+                        Unfollow
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+            
+        {% endfor %}
+    </div>
+   
+   
+</div>
+
+{% endblock %}

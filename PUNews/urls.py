@@ -4,7 +4,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
- 
+
     path('', include('news.urls')),
     path('', include('student.urls')),
     path('', include('faculty.urls')),

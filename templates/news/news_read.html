@@ -37,33 +37,33 @@
     
     {% if user.is_authenticated and user == news.posted_by or user.is_elevated %}
     <div class="border border-1 border-dark mt-3">
-        <div class="headline px-5 pt-3" style="background-color: #ffd300;">
+        <div class="headline px-5 pt-3" style="background-color: #ffef9c;">
             
             <span class="display-5 fw-bold" style="max-width: 50rem;"> Moderation</span>
             
             <span>
-                You can, approve or delete this post
+                Only You can view this section
             </span>
             <hr>
             
-            <div class="py-3"  style="">
+            <div class="py-3">
                 {% if user.is_elevated and not news.is_approved %}
                 <a
                     class="btn-lg px-3 rounded-0 border border-dark border-1 me-4 text-white"
-                    
                     href="{% url 'approve_news' news.news_id %}"
-                    style="background-color: #0ca678;"
+                    style="background-color: #65e2bd;"
                     ><i class="fa-solid fa-thumbs-up"></i></i
                     > Approve </a>
-                {% endif %}    
-                
-                {% if user == news.posted_by or user.is_elevated %}
-
-                <a
+                    {% endif %}    
+                    
+                    {% if user == news.posted_by or user.is_elevated %}
+                    
+                    <a
                     class="btn-lg px-3 rounded-0 border border-dark border-1 me-4 text-white"
                     href="{% url 'delete_news' news.news_id %}"
                     role="button"
-                    style="background-color: #ff0000;"
+                    style="background-color: #f56060;"
+                    data-mdb-toggle="tooltip" title="This post will be deleted"
                     ><i class="fa-solid fa-trash"></i
                     > Delete </a>
                 

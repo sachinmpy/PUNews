@@ -7,3 +7,28 @@
 {% block navbar %} 
 {% include 'base_templates/navbar_settings.html' %}
 {% endblock %}
+
+{% block body %}
+
+    <div class="display-6 p-3 m-3 border border-1 border-dark" style="background-color: #fff0e5;">
+      All Posts by {{user.username|capfirst}}
+    </div>
+
+    <div class="row row-cols-1 p-3 row-cols-md-3  g-4">
+      {% for post in posts %}
+      <div class="card rounded-0 border border-dark border-1 bg-light my-2 m-3 w-75">
+        <div class="card-body">
+            <div class="p-1 fw-bold"> @{{ post.posted_by }} <span class="p-2 text-muted" style="font-size: 12px;">{{ post.posted_date | date:"D d M Y" }}</span>  
+            </div>
+            <p class="card-text p-1 fs-3">
+                {{ post.content }} 
+            </p>
+            <a href="{% url 'delete_post' post.post_id %}" class="btn btn-danger" role="button">
+                Delete
+            </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+{% endblock %}

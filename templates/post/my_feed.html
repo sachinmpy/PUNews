@@ -1,0 +1,17 @@
+{% extends 'base_templates/base.html' %}
+
+{% block title %} Welcome to PUNews!! {% endblock %}
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        {% include 'base_templates/navbar_loggedin.html' %}
+    {% else %}    
+        {% include 'base_templates/navbar_notloggedin.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    
+
+{% endblock %}

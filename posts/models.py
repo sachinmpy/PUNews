@@ -6,6 +6,9 @@ from user_models.models import User
 class Post(models.Model):
     post_id = models.CharField(max_length=50, primary_key=True, default=uuid.uuid4, editable=False)
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.CharField(max_length=256)
+    content = models.TextField(max_length=256)
     posted_date = models.DateTimeField(auto_now_add=True)
-    is_global = models.BooleanField(default=False)
+    is_global = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.posted_by}: {self.content}'

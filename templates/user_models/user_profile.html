@@ -13,16 +13,38 @@
 {% block body %}
     <div class="mt-5"></div>
 
-    <div class="banner row mt-5 pattern-polka-v2 border rounded-0 border-dark border-1">
+    <div class="banner row mt-5 pattern-polka-v2 border rounded-0 border-dark border-1 d-flex justify-content-end align-items-end">
         <div class="col-4 bg-light border-end display-flex p-4">
             <h1 class="display-4 fw-bold">{{user.first_name | capfirst}}</h1>
             <h1 class="display-4 fw-bold">{{user.last_name | capfirst}}</h1>
             <h5 class="text-primary">@{{user.username}} <span class="badge badge-primary">{{user.designation}}</span></h5>
             <span class="text-muted fs-6">Department:</span> <span class="fs-4 fw-bold">{{user.department}}</span>
         </div>
-        <div class="col-8 h-100">
+        <div class="col-8 h-100 d-flex justify-content-end  flex-fill my-3">
+          
+          {% if not my_profile and follow == None and logged_in %}
+          
+          <a
+          class="nav-link active align-content-baseline rounded-0 border-1 border border-primary p-2 fw-bold px-5"
+          href="{% url 'follow' user %}"
+          style="background-color: rgb(217, 243, 250);"
+          >Follow</a>
+          
+          {% endif %}
 
-        </div>
+
+          {% if not my_profile and follow != None and logged_in %}
+          
+          <a
+          class="nav-link active align-content-baseline rounded-0 border-1 border border-primary p-2 fw-bold px-5"
+          href="{% url 'unfollow' user %}"
+          style="background-color: rgb(217, 243, 250);"
+          >Unfollow</a>
+          
+          {% endif %}
+        
+        
+          </div>
     </div>
 
     <div class="row mt-5 ">
@@ -91,7 +113,24 @@
 
           </div>
           <div class="tab-pane fade" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-            Tab 2 content
+            <div class="display-6 p-3 m-3 border border-1 border-dark" style="background-color: #fff0e5;">
+              All Posts by {{user.username|capfirst}}
+            </div>
+
+            <div class="row row-cols-1 p-3 row-cols-md-3  g-4">
+              {% for post in all_posts %}
+              <div class="card rounded-0 border border-dark border-1 bg-light my-2 m-3 w-75">
+                <div class="card-body">
+                    <div class="p-1 fw-bold"> @{{ post.posted_by }} <span class="p-2 text-muted" style="font-size: 12px;">{{ post.posted_date | date:"D d M Y" }}</span>  
+                    </div>
+                    <p class="card-text p-1 fs-3">
+                        {{ post.content }} 
+                    </p>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
           </div>
         </div>
   <!-- Pills content -->

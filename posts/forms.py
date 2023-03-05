@@ -8,3 +8,9 @@ class PostCreationForm(ModelForm):
     class Meta:
         model = Post
         fields = ('posted_by', 'content')
+
+        widgets = {
+            'posted_by': forms.TextInput(attrs={
+                'readonly': True,
+            })
+        }
